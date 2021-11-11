@@ -49,9 +49,9 @@ void ACSII_Converter::ConvertAndOutput(std::string path)
 int ACSII_Converter::GetGraynessOfArea(QImage *im, int px, int py)
 {
     int gs = 0;
-    for(int y = py; y < py + SYMPHOL_HEIGHT; y++)
+    for(int y = py * SYMPHOL_HEIGHT; y < py * SYMPHOL_HEIGHT + SYMPHOL_HEIGHT; y++)
     {
-        for(int x = px; x < px + SYMPHOL_WIDTH; x++)
+        for(int x = px * SYMPHOL_WIDTH; x < px * SYMPHOL_WIDTH + SYMPHOL_WIDTH; x++)
         {
             gs += ACSII_Converter::GetGrayness(im->pixelColor(x,y));
         }

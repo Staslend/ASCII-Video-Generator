@@ -35,6 +35,7 @@ public:
             std::cout << "No file" << std::endl;
             return;
         }
+        else file->resize(0);
         textStream = new QTextStream(file);
         if(textStream->device() == nullptr)
         {
@@ -42,7 +43,7 @@ public:
             return;
         }
 
-        ACSII_Converter::SetParams(800,600,100,60);
+        ACSII_Converter::SetParams(1920,1080,200,60);
 
         mp.setSource(QUrl::fromLocalFile("/home/tanaka/Videos/n.mp4"));
         mp.setVideoOutput(med);
@@ -62,7 +63,8 @@ public slots:
 
         ACSII_Converter::ConvertAndPutToStream(vs->videoFrame().toImage(),
                                                textStream);
-        t->start(150);
+        *textStream << "Line Break" << Qt::endl;
+        t->start(30);
         frameN++;
     }
 };
@@ -76,7 +78,7 @@ int main(int argc, char *argv[])
 
     t = new QTimer();
     QObject::connect(t, &QTimer::timeout, &va, &VideoASCII::RenderFrame);
-    t->start(100);
+    t->start(150);
 
   return a.exec();
 
